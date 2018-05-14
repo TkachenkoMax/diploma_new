@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Checkout" default="quality">
+    <target name="quality" depends="mkdirs, phpcs, phpcpd, phpmd, pdepend, eslint">
+        <echo message="Checkout code quality checks are completed"/>
+    </target>
+
+    <!-- Create required directories. -->
+    <target name="mkdirs">
+        <mkdir dir="${basedir}/reports" />
+        <mkdir dir="${basedir}/reports/dependencies" />
+    </target>
+
+    <!-- PHP Mess Detector -->
+    <target name="phpmd"
+            description="Perform project mess detection using PHPMD and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="phpmd">
+            <arg path="${basedir}" />
+            <arg value="xml" />
+            <arg value="codesize,unusedcode" />
+            <arg value="--reportfile" />
+            <arg path="${basedir}/reports/pmd.xml" />
+
+            <arg value="--exclude" />
+            <arg value="tests,vendor,reports,database" />
+        </exec>
+    </target>
+
+    <!-- PHP Code Sniffer - tokenizes PHP, JS and CSS files and detects violations of defined coding standards -->
+    <target name="phpcs" description="Check code with PHP Code Sniffer">
+        <exec dir="${basedir}" executable="phpcs">
+            <arg line="-p
+                --extensions=php
+                --standard=PSR1
+                --ignore=reports/*,tests/*,vendor/*,resources/*,database/*,bootstrap/*,Envoy.blade.php
+                --tab-width=4
+                --report=checkstyle
+                --report-file=reports/checkstyle.xml
+                ${basedir}" />
+        </exec>
+    </target>
+
+    <target name="phpcpd"
+            description="Find duplicate code using PHPCPD and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec dir="${basedir}" executable="phpcpd">
+            <arg line="${basedir} --log-pmd reports/cpd.xml" />
+
+            <arg value="--exclude" />
+            <arg value="tests" />
+            <arg value="--exclude" />
+            <arg value="reports" />
+            <arg value="--exclude" />
+            <arg value="vendor" />
+            <arg value="--exclude" />
+            <arg value="database" />
+            <arg value="--exclude" />
+            <arg value="bootstrap" />
+        </exec>
+    </target>
+
+    <!-- PHP Depend -->
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend.">
+        <exec dir="${basedir}" executable="pdepend" failonerror="false">
+            <arg line="--jdepend-xml=${basedir}/reports/jdepend.xml
+                --jdepend-chart=${basedir}/reports/dependencies/jdepend.svg
+                --overview-pyramid=${basedir}/reports/dependencies/pyramid.svg
+                --ignore=tests,reports,vendor
+                --suffix=php
+                ${basedir}" />
+        </exec>
+    </target>
+
+    <!-- JS ESLINT -->
+    <target name="eslint" description="Checks styles for JS files.">
+        <exec dir="${basedir}" executable="node_modules/eslint/bin/eslint.js" failonerror="false" output="reports/checkstyle-eslint.xml">
+            <arg line="resources/js -f checkstyle" />
+        </exec>
+    </target>
+</project>
