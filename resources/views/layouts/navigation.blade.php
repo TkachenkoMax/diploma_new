@@ -25,11 +25,11 @@
                     <a aria-expanded="false" role="button" href="#"> Contacts </a>
                 </li>
                 <li>
-                    <a aria-expanded="false" role="button" href="#"> Settings </a>
+                    <a aria-expanded="false" role="button" href="{{ route('settings.index')  }}"> Settings </a>
                 </li>
                 @role('admin')
                 <li>
-                    <a aria-expanded="false" role="button" href="{{ route('admin.users')  }}"> Admin Panel </a>
+                    <a aria-expanded="false" role="button" href="{{ route('admin.users') }}"> Admin Panel </a>
                 </li>
                 @endrole
             </ul>

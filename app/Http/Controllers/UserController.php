@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use App\Repositories\AdminRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class UserController
@@ -15,85 +14,60 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
-     * @var \App\Repositories\AdminRepository
+     * @var \App\Repositories\UserRepository
      */
     private $repository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \App\Repositories\AdminRepository $repository
+     * @param \App\Repositories\UserRepository $repository
      */
-    public function __construct(AdminRepository $repository)
+    public function __construct(UserRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * Display a listing of the resource.
+     * Display settings page.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function settings()
     {
-        $data = [];
+        $user = Auth::user();
 
-        $data['roles'] = Role::all()->pluck('name', 'id')->toArray();
-
-        return view('admin.usersList')->with('data', $data);
+        return view('settings.index')->with('user', $user);
     }
 
     /**
-     * Process data tables ajax request.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
-     */
-    public function getUsers(): JsonResponse
-    {
-        return $this->repository->getUsersList();
-    }
-
-    /**
-     * Return user profile view.
-     *
-     * @param $id
-     * @return $this
-     */
-    public function viewUser($id)
-    {
-        $user = User::with(['roles'])->where('id', $id)->first();
-        $roles = Role::all()->pluck('name', 'id')->toArray();
-
-        return view('admin.modals.userView')->with(['user' => $user, 'roles' => $roles]);
-    }
-
-    /**
-     * Update user's roles.
+     * Change user password.
      *
      * @param Request $request
-     * @param $id
-     * @return User
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateRoles(Request $request, $id)
-    {
-        $user  = User::findOrFail($id);
-        $roles = collect(is_array($request->roles) ?: [$request->roles])->filter(function ($role) {
-            return $role > 0;
-        })->toArray();
+    public function changePassword(Request $request){
 
-        return $this->repository->updateRoles($roles, $user);
-    }
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with('error', 'Your current password does not matches with the password you provided. Please try again.');
+        }
 
-    /**
-     * Delete a user form the database.
-     *
-     * @param $id
-     * @return User
-     */
-    public function deleteUser($id)
-    {
-        return $this->repository->deleteUser($id);
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()->with('error', 'New Password cannot be same as your current password. Please choose a different password.');
+        }
+
+        $validatedData = $request->validate([
+            'current-password' => 'required',
+            'new-password'     => 'required|string|min:6',
+        ]);
+
+        //Change Password
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new-password'));
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password changed successfully!');
     }
 }

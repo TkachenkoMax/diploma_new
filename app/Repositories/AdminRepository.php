@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 /**
- * Class AdminRepository
+ * Class AdminRepository.
  * @package namespace App\Repositories;
  */
 class AdminRepository extends BaseRepository
 {
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -27,7 +27,7 @@ class AdminRepository extends BaseRepository
     }
 
     /**
-     * Find user by ID
+     * Find user by ID.
      *
      * @param integer $id user id
      *

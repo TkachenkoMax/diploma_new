@@ -25,3 +25,25 @@
 .select2-container--open {
   z-index:10000;
 }
+
+.img-responsive-50 {
+  margin: 0 auto;
+  max-width: 50%;
+}
+
+@media (max-width: 767px) {
+
+  // Align text to center.
+  .text-xs-center {
+    text-align: center;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.label-right {
+  text-align: right;
+  margin-top: 7px;
+}

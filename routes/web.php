@@ -25,6 +25,10 @@ Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
+    //Settings routes.
+    Route::get('/settings', 'UserController@settings')->name('settings.index');
+    Route::post('/settings/change-password', 'UserController@changePassword')->name('settings.change.password');
+
     //Admin block routes.
     Route::middleware(['role:admin'])->prefix('admin')->group(function () {
         Route::get('/users', [
