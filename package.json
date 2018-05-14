@@ -24,7 +24,7 @@
     "ladda": "^1.0.0",
     "laravel-mix": "0.7.0",
     "lodash": "^4.16.2",
-    "moment": "2.18.1",
+    "moment": "^2.19.3",
     "select2": "^4.0.3",
     "toastr": "*",
     "webpack": "2.2.1",
