@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        <h3><strong>{{ $user->getFullName() }}</strong></h3>
+                        <h3><strong>{{ $user->getFullName() }} @if(isset($user->sex))({{ $user->getSex() }})@endif</strong></h3>
                         <p>Work place: {{ $user->work_place ?: 'Not specified' }}</p>
                         <p><i class="fa fa-map-marker"></i> {{ $user->address ?: 'Address not specified' }}</p>
                         <abbr title="Phone">P:</abbr> {{ $user->phone_number ?: '—' }}

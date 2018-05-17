@@ -11,13 +11,18 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoleAndPermission;
 
+    const SEX = [
+        0 => 'Man',
+        1 => 'Woman'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password'
+        'firstname', 'lastname', 'email', 'sex', 'date_of_birth', 'phone_number', 'address', 'work_place', 'work_position', 'password'
     ];
 
     /**
@@ -56,5 +61,15 @@ class User extends Authenticatable
      */
     public function getFullName() {
         return $this->firstname . ' ' . $this->lastname;
+    }
+
+    /**
+     * Returns user's sex in string presentation.
+     *
+     * @return mixed
+     */
+    public function getSex()
+    {
+        return self::SEX[$this->sex];
     }
 }
