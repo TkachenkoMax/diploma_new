@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserAccountInformation;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,10 +61,10 @@ class UserController extends Controller
     /**
      * Change user account information.
      *
-     * @param Request $request
+     * @param StoreUserAccountInformation $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function changeInformation(Request $request)
+    public function changeInformation(StoreUserAccountInformation $request)
     {
         $params = $request->except('_token');
         $this->repository->changeInformation($params);

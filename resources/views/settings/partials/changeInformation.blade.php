@@ -8,7 +8,7 @@
     </div>
     {!! Form::label('sex' , 'Sex', ["class" => "col-sm-2 col-form-label label-right"]) !!}
     <div class="col-sm-4">
-        {!! Form::select('sex', [null => 'Not specified', '0' => 'Male', '1' => 'Female'], $user->sex ?: null, ["class" => "custom-select"]); !!}
+        {!! Form::select('sex', [null => 'Not specified', '0' => 'Male', '1' => 'Female'], $user->sex, ["class" => "custom-select"]); !!}
     </div>
 </div>
 
