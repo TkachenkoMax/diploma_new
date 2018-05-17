@@ -1,7 +1,7 @@
 <div class="col-sm-4">
     <div class="text-center">
         <img alt="image" class="img-circle m-t-xs img-responsive img-responsive-50 cursor-pointer"
-             src="https://png.icons8.com/color/1600/user-male-skin-type-4.png">
+             src="{{ url('storage/public/avatars/LsHVRZJM9u9g1KSckEsoAy9Tt3vtbO5PH72ZIVdK.png') }}" id="profile_picture">
         <div class="m-t-xs font-bold">{{ $user->work_position ?: 'Work not specified' }}</div>
     </div>
 </div>

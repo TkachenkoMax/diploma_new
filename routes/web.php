@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/settings', 'UserController@settings')->name('settings.index');
     Route::post('/settings/change-password', 'UserController@changePassword')->name('settings.change.password');
     Route::post('/settings/change-information', 'UserController@changeInformation')->name('settings.change.information');
+    Route::post('/settings/change-photo', 'UserController@changePhoto')->name('settings.change.photo');
 
     //Admin block routes.
     Route::middleware(['role:admin'])->prefix('admin')->group(function () {

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserAccountInformation;
 use App\Repositories\UserRepository;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserController
@@ -70,5 +73,14 @@ class UserController extends Controller
         $this->repository->changeInformation($params);
 
         return redirect()->back()->with('success', 'Information changed successfully!');
+    }
+
+    public function changePhoto(Request $request)
+    {
+        $path = $request->file('croppedImage')->store('public/avatars');
+
+        $user = Auth::user();
+        $user->avatar = $path;
+        $user->save();
     }
 }

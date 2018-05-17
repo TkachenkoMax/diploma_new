@@ -58,4 +58,5 @@
             </div>
         </div>
     </div>
+    @include('settings.modals.updatePictureModal')
 @endsection
