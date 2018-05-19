@@ -1,5 +1,16 @@
 {!! Form::open(array('url' => '/settings/change-information', 'class' => 'm-t', 'style' => 'padding-right: 10px;')) !!}
 
+<div class="form-group row m-b-md">
+    {!! Form::label('firstname' , 'Firstname', ["class" => "col-sm-2 col-form-label label-right"]) !!}
+    <div class="col-sm-4">
+        {!! Form::text('firstname' , $user->firstname, ["placeholder" => "", "class" => "form-control", "id" => "firstname"]) !!}
+    </div>
+    {!! Form::label('lastname' , 'Lastname', ["class" => "col-sm-2 col-form-label label-right"]) !!}
+    <div class="col-sm-4">
+        {!! Form::text('lastname' , $user->lastname, ["placeholder" => "", "class" => "form-control", "id" => "lastname"]) !!}
+    </div>
+</div>
+
 <div class="form-group row">
     {!! Form::label('date_of_birth' , 'Date of birth', ["class" => "col-sm-2 col-form-label label-right"]) !!}
     <div class="col-sm-4">

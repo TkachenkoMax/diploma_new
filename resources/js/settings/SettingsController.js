@@ -90,35 +90,37 @@ const SettingsController = function () {
             $inputImage.addClass("hide");
         }
 
-        const laddaDownload = Ladda.create(document.querySelector('#download'));
+        if ($('#user-settings').length !== 0) {
+            const laddaDownload = Ladda.create(document.querySelector('#download'));
 
-        $("#download").click(function() {
-            $($image).cropper('getCroppedCanvas').toBlob(function (blob) {
-                laddaDownload.start();
-                const formData = new FormData();
+            $("#download").click(function() {
+                $($image).cropper('getCroppedCanvas').toBlob(function (blob) {
+                    laddaDownload.start();
+                    const formData = new FormData();
 
-                formData.append('croppedImage', blob);
+                    formData.append('croppedImage', blob);
 
-                $.ajax('/settings/change-photo', {
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: response => {
-                        const newUrl = response.link;
-                        $('#profile_picture').attr('src', newUrl);
-                        $('#update_photo_modal').modal('hide');
-                        toastr.success("Successfully updated!");
-                    },
-                    error: () => {
-                        toastr.error("Upload error!");
-                    },
-                    complete: () => {
-                        laddaDownload.stop();
-                    }
+                    $.ajax('/settings/change-photo', {
+                        method: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: response => {
+                            const newUrl = response.link;
+                            $('#profile_picture').attr('src', newUrl);
+                            $('#update_photo_modal').modal('hide');
+                            toastr.success("Successfully updated!");
+                        },
+                        error: () => {
+                            toastr.error("Upload error!");
+                        },
+                        complete: () => {
+                            laddaDownload.stop();
+                        }
+                    });
                 });
             });
-        });
+        }
 
         $("#zoomIn").click(function() {
             $image.cropper("zoom", 0.1);

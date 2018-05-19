@@ -26,6 +26,8 @@ class StoreUserAccountInformation extends FormRequest
     public function rules()
     {
         return [
+            'firstname'     => 'required|max:255',
+            'lastname'      => 'required|max:255',
             'date_of_birth' => 'nullable|date_format:d/m/Y',
             'sex'           => 'nullable', Rule::in([null, 0, 1]),
             'phone_number'  => 'nullable|regex:/[(][0]\d{2}[)][-]\d{3}[-]\d{2}[-]\d{2}/',
