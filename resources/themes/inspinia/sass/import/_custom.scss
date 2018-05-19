@@ -25,3 +25,830 @@
 .select2-container--open {
   z-index:10000;
 }
+
+.img-responsive-50 {
+  margin: 0 auto;
+  max-width: 50%;
+}
+
+@media (max-width: 767px) {
+
+  // Align text to center.
+  .text-xs-center {
+    text-align: center;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.label-right {
+  text-align: right;
+  margin-top: 7px;
+}
+
+/*!
+ * Cropper.js v1.3.5
+ * https://github.com/fengyuanchen/cropperjs
+ *
+ * Copyright (c) 2015-2018 Chen Fengyuan
+ * Released under the MIT license
+ *
+ * Date: 2018-04-15T06:19:56.029Z
+ */
+
+.cropper-container {
+  direction: ltr;
+  font-size: 0;
+  line-height: 0;
+  position: relative;
+  -ms-touch-action: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.cropper-container img {/*Avoid margin top issue (Occur only when margin-top <= -height)
+ */
+  display: block;
+  height: 100%;
+  image-orientation: 0deg;
+  max-height: none !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  width: 100%;
+}
+
+.cropper-wrap-box,
+.cropper-canvas,
+.cropper-drag-box,
+.cropper-crop-box,
+.cropper-modal {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.cropper-wrap-box,
+.cropper-canvas {
+  overflow: hidden;
+}
+
+.cropper-drag-box {
+  background-color: #fff;
+  opacity: 0;
+}
+
+.cropper-modal {
+  background-color: #000;
+  opacity: .5;
+}
+
+.cropper-view-box {
+  display: block;
+  height: 100%;
+  outline-color: rgba(51, 153, 255, 0.75);
+  outline: 1px solid #39f;
+  overflow: hidden;
+  width: 100%;
+}
+
+.cropper-dashed {
+  border: 0 dashed #eee;
+  display: block;
+  opacity: .5;
+  position: absolute;
+}
+
+.cropper-dashed.dashed-h {
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+  height: 33.33333%;
+  left: 0;
+  top: 33.33333%;
+  width: 100%;
+}
+
+.cropper-dashed.dashed-v {
+  border-left-width: 1px;
+  border-right-width: 1px;
+  height: 100%;
+  left: 33.33333%;
+  top: 0;
+  width: 33.33333%;
+}
+
+.cropper-center {
+  display: block;
+  height: 0;
+  left: 50%;
+  opacity: .75;
+  position: absolute;
+  top: 50%;
+  width: 0;
+}
+
+.cropper-center:before,
+.cropper-center:after {
+  background-color: #eee;
+  content: ' ';
+  display: block;
+  position: absolute;
+}
+
+.cropper-center:before {
+  height: 1px;
+  left: -3px;
+  top: 0;
+  width: 7px;
+}
+
+.cropper-center:after {
+  height: 7px;
+  left: 0;
+  top: -3px;
+  width: 1px;
+}
+
+.cropper-face,
+.cropper-line,
+.cropper-point {
+  display: block;
+  height: 100%;
+  opacity: .1;
+  position: absolute;
+  width: 100%;
+}
+
+.cropper-face {
+  background-color: #fff;
+  left: 0;
+  top: 0;
+}
+
+.cropper-line {
+  background-color: #39f;
+}
+
+.cropper-line.line-e {
+  cursor: ew-resize;
+  right: -3px;
+  top: 0;
+  width: 5px;
+}
+
+.cropper-line.line-n {
+  cursor: ns-resize;
+  height: 5px;
+  left: 0;
+  top: -3px;
+}
+
+.cropper-line.line-w {
+  cursor: ew-resize;
+  left: -3px;
+  top: 0;
+  width: 5px;
+}
+
+.cropper-line.line-s {
+  bottom: -3px;
+  cursor: ns-resize;
+  height: 5px;
+  left: 0;
+}
+
+.cropper-point {
+  background-color: #39f;
+  height: 5px;
+  opacity: .75;
+  width: 5px;
+}
+
+.cropper-point.point-e {
+  cursor: ew-resize;
+  margin-top: -3px;
+  right: -3px;
+  top: 50%;
+}
+
+.cropper-point.point-n {
+  cursor: ns-resize;
+  left: 50%;
+  margin-left: -3px;
+  top: -3px;
+}
+
+.cropper-point.point-w {
+  cursor: ew-resize;
+  left: -3px;
+  margin-top: -3px;
+  top: 50%;
+}
+
+.cropper-point.point-s {
+  bottom: -3px;
+  cursor: s-resize;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.cropper-point.point-ne {
+  cursor: nesw-resize;
+  right: -3px;
+  top: -3px;
+}
+
+.cropper-point.point-nw {
+  cursor: nwse-resize;
+  left: -3px;
+  top: -3px;
+}
+
+.cropper-point.point-sw {
+  bottom: -3px;
+  cursor: nesw-resize;
+  left: -3px;
+}
+
+.cropper-point.point-se {
+  bottom: -3px;
+  cursor: nwse-resize;
+  height: 20px;
+  opacity: 1;
+  right: -3px;
+  width: 20px;
+}
+
+@media (min-width: 768px) {
+  .cropper-point.point-se {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+@media (min-width: 992px) {
+  .cropper-point.point-se {
+    height: 10px;
+    width: 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cropper-point.point-se {
+    height: 5px;
+    opacity: .75;
+    width: 5px;
+  }
+}
+
+.cropper-point.point-se:before {
+  background-color: #39f;
+  bottom: -50%;
+  content: ' ';
+  display: block;
+  height: 200%;
+  opacity: 0;
+  position: absolute;
+  right: -50%;
+  width: 200%;
+}
+
+.cropper-invisible {
+  opacity: 0;
+}
+
+.cropper-bg {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
+}
+
+.cropper-hide {
+  display: block;
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+
+.cropper-hidden {
+  display: none !important;
+}
+
+.cropper-move {
+  cursor: move;
+}
+
+.cropper-crop {
+  cursor: crosshair;
+}
+
+.cropper-disabled .cropper-drag-box,
+.cropper-disabled .cropper-face,
+.cropper-disabled .cropper-line,
+.cropper-disabled .cropper-point {
+  cursor: not-allowed;
+}
+
+/*!
+ * Ladda
+ * http://lab.hakim.se/ladda
+ * MIT licensed
+ *
+ * Copyright (C) 2018 Hakim El Hattab, http://hakim.se
+ */
+
+
+/*************************************
+ * CONFIG
+ */
+
+$spinnerSize: 32px !default;
+
+
+/*************************************
+ * MIXINS
+ */
+
+@mixin transition( $value ) {
+  transition: $value !important;
+}
+
+@mixin transform( $value ) {
+  transform: $value;
+}
+
+@mixin buttonColor( $name, $color ) {
+  &[data-color=#{$name}] {
+    background: $color;
+
+    &:hover {
+      background-color: lighten( $color, 5% );
+    }
+  }
+}
+
+
+/*************************************
+ * Opacity animation for spin.js
+ */
+
+@keyframes ladda-spinner-line-fade {
+  0%, 100% {
+    opacity: 0.22; /* minimum opacity */
+  }
+  1% {
+    opacity: 1;
+  }
+}
+
+
+/*************************************
+ * BUTTON BASE
+ */
+
+.ladda-button {
+  position: relative;
+}
+
+
+/* Spinner animation */
+.ladda-button .ladda-spinner {
+  position: absolute;
+  z-index: 2;
+  display: inline-block;
+  width: $spinnerSize;
+  top: 50%;
+  margin-top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Button label */
+.ladda-button .ladda-label {
+  position: relative;
+  z-index: 3;
+}
+
+/* Progress bar */
+.ladda-button .ladda-progress {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba( 0, 0, 0, 0.2 );
+  display: none;
+
+  @include transition( 0.1s linear all );
+}
+.ladda-button[data-loading] .ladda-progress {
+  display: block;
+}
+
+
+/*************************************
+ * EASING
+ */
+
+.ladda-button,
+.ladda-button .ladda-spinner,
+.ladda-button .ladda-label {
+  @include transition( 0.3s cubic-bezier(0.175, 0.885, 0.320, 1.275) all );
+}
+
+.ladda-button[data-style=zoom-in],
+.ladda-button[data-style=zoom-in] .ladda-spinner,
+.ladda-button[data-style=zoom-in] .ladda-label,
+.ladda-button[data-style=zoom-out],
+.ladda-button[data-style=zoom-out] .ladda-spinner,
+.ladda-button[data-style=zoom-out] .ladda-label {
+  @include transition( 0.3s ease all );
+}
+
+
+/*************************************
+ * EXPAND RIGHT
+ */
+
+.ladda-button[data-style=expand-right] {
+  .ladda-spinner {
+    right: $spinnerSize/-2 + 10;
+  }
+
+  &[data-size="s"] .ladda-spinner,
+  &[data-size="xs"] .ladda-spinner {
+    right: $spinnerSize/-2 + 4;
+  }
+
+  &[data-loading] {
+    padding-right: 56px;
+
+    .ladda-spinner {
+      opacity: 1;
+    }
+
+    &[data-size="s"],
+    &[data-size="xs"] {
+      padding-right: 40px;
+    }
+  }
+}
+
+
+/*************************************
+ * EXPAND LEFT
+ */
+
+.ladda-button[data-style=expand-left] {
+  .ladda-spinner {
+    left: $spinnerSize/2 + 10;
+  }
+
+  &[data-size="s"] .ladda-spinner,
+  &[data-size="xs"] .ladda-spinner {
+    left: 4px;
+  }
+
+  &[data-loading] {
+    padding-left: 56px;
+
+    .ladda-spinner {
+      opacity: 1;
+    }
+
+    &[data-size="s"],
+    &[data-size="xs"] {
+      padding-left: 40px;
+    }
+  }
+}
+
+
+/*************************************
+ * EXPAND UP
+ */
+
+.ladda-button[data-style=expand-up] {
+  overflow: hidden;
+
+  .ladda-spinner {
+    top: -$spinnerSize;
+    left: 50%;
+    margin-left: 0;
+  }
+
+  &[data-loading] {
+    padding-top: 54px;
+
+    .ladda-spinner {
+      opacity: 1;
+      top: ($spinnerSize/ 2) + 10;
+      margin-top: 0;
+    }
+
+    &[data-size="s"],
+    &[data-size="xs"] {
+      padding-top: 32px;
+
+      .ladda-spinner {
+        top: 4px;
+      }
+    }
+  }
+}
+
+
+/*************************************
+ * EXPAND DOWN
+ */
+
+.ladda-button[data-style=expand-down] {
+  overflow: hidden;
+
+  .ladda-spinner {
+    top: 62px;
+    left: 50%;
+    margin-left: 0;
+  }
+
+  &[data-size="s"] .ladda-spinner,
+  &[data-size="xs"] .ladda-spinner {
+    top: 40px;
+  }
+
+  &[data-loading] {
+    padding-bottom: 54px;
+
+    .ladda-spinner {
+      opacity: 1;
+    }
+
+    &[data-size="s"],
+    &[data-size="xs"] {
+      padding-bottom: 32px;
+    }
+  }
+}
+
+
+/*************************************
+ * SLIDE LEFT
+ */
+.ladda-button[data-style=slide-left] {
+  overflow: hidden;
+
+  .ladda-label {
+    position: relative;
+  }
+  .ladda-spinner {
+    left: 100%;
+    margin-left: 0;
+  }
+
+  &[data-loading] {
+    .ladda-label {
+      opacity: 0;
+      left: -100%;
+    }
+    .ladda-spinner {
+      opacity: 1;
+      left: 50%;
+    }
+  }
+}
+
+
+/*************************************
+ * SLIDE RIGHT
+ */
+.ladda-button[data-style=slide-right] {
+  overflow: hidden;
+
+  .ladda-label {
+    position: relative;
+  }
+  .ladda-spinner {
+    right: 100%;
+    margin-left: 0;
+    left: $spinnerSize/2;
+
+    [dir="rtl"] & {
+      right: auto;
+    }
+  }
+
+  &[data-loading] {
+    .ladda-label {
+      opacity: 0;
+      left: 100%;
+    }
+    .ladda-spinner {
+      opacity: 1;
+      left: 50%;
+    }
+  }
+}
+
+
+/*************************************
+ * SLIDE UP
+ */
+.ladda-button[data-style=slide-up] {
+  overflow: hidden;
+
+  .ladda-label {
+    position: relative;
+  }
+  .ladda-spinner {
+    left: 50%;
+    margin-left: 0;
+    margin-top: 1em;
+  }
+
+  &[data-loading] {
+    .ladda-label {
+      opacity: 0;
+      top: -1em;
+    }
+    .ladda-spinner {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
+}
+
+
+/*************************************
+ * SLIDE DOWN
+ */
+.ladda-button[data-style=slide-down] {
+  overflow: hidden;
+
+  .ladda-label {
+    position: relative;
+  }
+  .ladda-spinner {
+    left: 50%;
+    margin-left: 0;
+    margin-top: -2em;
+  }
+
+  &[data-loading] {
+    .ladda-label {
+      opacity: 0;
+      top: 1em;
+    }
+    .ladda-spinner {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
+}
+
+
+/*************************************
+ * ZOOM-OUT
+ */
+
+.ladda-button[data-style=zoom-out] {
+  overflow: hidden;
+}
+.ladda-button[data-style=zoom-out] .ladda-spinner {
+  left: 50%;
+  margin-left: $spinnerSize;
+
+  @include transform( scale( 2.5 ) );
+}
+.ladda-button[data-style=zoom-out] .ladda-label {
+  position: relative;
+  display: inline-block;
+}
+
+.ladda-button[data-style=zoom-out][data-loading] .ladda-label {
+  opacity: 0;
+
+  @include transform( scale( 0.5 ) );
+}
+.ladda-button[data-style=zoom-out][data-loading] .ladda-spinner {
+  opacity: 1;
+  margin-left: 0;
+
+  @include transform( none );
+}
+
+
+/*************************************
+ * ZOOM-IN
+ */
+
+.ladda-button[data-style=zoom-in] {
+  overflow: hidden;
+}
+.ladda-button[data-style=zoom-in] .ladda-spinner {
+  left: 50%;
+  margin-left: $spinnerSize/-2;
+
+  @include transform( scale( 0.2 ) );
+}
+.ladda-button[data-style=zoom-in] .ladda-label {
+  position: relative;
+  display: inline-block;
+}
+
+.ladda-button[data-style=zoom-in][data-loading] .ladda-label {
+  opacity: 0;
+
+  @include transform( scale( 2.2 ) );
+}
+.ladda-button[data-style=zoom-in][data-loading] .ladda-spinner {
+  opacity: 1;
+  margin-left: 0;
+
+  @include transform( none );
+}
+
+
+/*************************************
+ * CONTRACT
+ */
+
+.ladda-button[data-style=contract] {
+  overflow: hidden;
+  width: 100px;
+}
+.ladda-button[data-style=contract] .ladda-spinner {
+  left: 50%;
+  margin-left: 0;
+}
+
+.ladda-button[data-style=contract][data-loading] {
+  border-radius: 50%;
+  width: 52px;
+}
+.ladda-button[data-style=contract][data-loading] .ladda-label {
+  opacity: 0;
+}
+.ladda-button[data-style=contract][data-loading] .ladda-spinner {
+  opacity: 1;
+}
+
+
+
+/*************************************
+ * OVERLAY
+ */
+
+.ladda-button[data-style=contract-overlay] {
+  overflow: hidden;
+  width: 100px;
+
+  box-shadow: 0px 0px 0px 2000px rgba(0,0,0,0);
+}
+.ladda-button[data-style=contract-overlay] .ladda-spinner {
+  left: 50%;
+  margin-left: 0;
+}
+
+.ladda-button[data-style=contract-overlay][data-loading] {
+  border-radius: 50%;
+  width: 52px;
+
+  /*outline: 10000px solid rgba( 0, 0, 0, 0.5 );*/
+  box-shadow: 0px 0px 0px 2000px rgba(0,0,0,0.8);
+}
+.ladda-button[data-style=contract-overlay][data-loading] .ladda-label {
+  opacity: 0;
+}
+.ladda-button[data-style=contract-overlay][data-loading] .ladda-spinner {
+  opacity: 1;
+}
+
+[dir="rtl"] .ladda-spinner > div {
+  left: 25% !important;
+}
+
+.img-wrap {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: white;
+  color: red;
+  width: 100%;
+  transition: .5s ease;
+  opacity: 0;
+  font-size: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.overlay > span {
+  cursor: pointer;
+}

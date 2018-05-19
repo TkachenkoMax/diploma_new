@@ -15,7 +15,6 @@ class AddNewFieldsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('lastname');
-            $table->string('avatar')->nullable();
             $table->integer('sex')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('phone_number', 50)->nullable();
@@ -33,7 +32,7 @@ class AddNewFieldsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['lastname', 'avatar', 'sex', 'date_of_birth', 'phone_number', 'address', 'work_place', 'work_position']);
+            $table->dropColumn(['lastname', 'sex', 'date_of_birth', 'phone_number', 'address', 'work_place', 'work_position']);
         });
     }
 }

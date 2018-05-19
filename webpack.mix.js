@@ -31,7 +31,8 @@ mix.sass('resources/themes/inspinia/sass/app.scss', 'public/css')
         'resources/themes/inspinia/vendor/select2/select2.min.css',
         'resources/themes/inspinia/vendor/daterangepicker/daterangepicker.css',
         'resources/themes/inspinia/vendor/bootstrap3-editable/css/bootstrap-editable.css',
-    ], 'public/css/vendor.css');
+        'resources/themes/inspinia/vendor/jasny-bootstrap/css/jasny-bootstrap.css',
+    ], 'public/css/vendor.css')
     mix.js([
         'resources/themes/inspinia/vendor/bootstrap/js/bootstrap.js',
         'resources/themes/inspinia/vendor/metisMenu/jquery.metisMenu.js',
@@ -50,13 +51,15 @@ mix.sass('resources/themes/inspinia/sass/app.scss', 'public/css')
         'resources/themes/inspinia/vendor/daterangepicker/moment.js',
         'resources/themes/inspinia/vendor/daterangepicker/daterangepicker.js',
         'resources/themes/inspinia/vendor/bootstrap3-editable/js/bootstrap-editable.js',
+        'resources/themes/inspinia/vendor/jasny-bootstrap/js/jasny-bootstrap.js',
         'resources/themes/inspinia/js/app.js',
     ], 'public/js/app.js')
     .js([
         'resources/js/app.js',
         'resources/js/dashboard/DashboardController.js',
         'resources/js/admin/UsersListController.js',
+        'resources/js/settings/SettingsController.js',
     ], 'public/js/organizer.js')
     .extract(['jquery', 'bootstrap', 'bootstrap-tagsinput', 'lodash', 'chartjs-plugin-annotation',
-        'datatables.net', 'datatables.net-bs', 'datatables.net-buttons', 'toastr'])
+        'datatables.net', 'datatables.net-bs', 'datatables.net-buttons', 'toastr', 'cropper', 'jquery-cropper', 'ladda'])
     .version();

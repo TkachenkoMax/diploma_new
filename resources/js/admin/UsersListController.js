@@ -142,7 +142,7 @@ const UsersListController = function () {
                     toastr.success('User successfully deleted!');
                     getDataForDataTable();
                 },
-                error: function (data) {
+                error: data => {
                     toastr.error('Something went wrong!', data.responseJSON.error);
                 }
             });
