@@ -25,6 +25,20 @@ Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
+    //Contacts block routes.
+    Route::prefix('contacts')->group(function () {
+        Route::get('/list', [
+            'as'         => 'contacts.list',
+            'uses'       => 'UserController@contacts',
+            'middleware' => 'aws'
+        ]);
+
+        Route::post('/delete-contact', [
+            'as'         => 'contacts.delete',
+            'uses'       => 'UserController@deleteContact',
+        ]);
+    });
+
     //Settings block routes.
     Route::prefix('settings')->group(function () {
         Route::get('/', [

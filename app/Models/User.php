@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Ultraware\Roles\Traits\HasRoleAndPermission;
 
@@ -16,6 +17,9 @@ class User extends Authenticatable
         0 => 'Man',
         1 => 'Woman'
     ];
+
+    const CONTACT_REQUESTED_STATUS = 1;
+    const CONTACT_ACCEPTED_STATUS  = 2;
 
     /**
      * The attributes that aren't mass assignable.
@@ -97,10 +101,36 @@ class User extends Authenticatable
      */
     public function getAvatarUrl()
     {
-        if (!is_null($this->getLastAvatar()) && Storage::disk('s3')->exists($this->getLastAvatar()->link)) {
-            return Storage::disk('s3')->url($this->getLastAvatar()->link);
+        $lastAvatar = $this->getLastAvatar();
+
+        if (!is_null($lastAvatar) && Storage::disk('s3')->exists($lastAvatar->link)) {
+            return Storage::disk('s3')->url($lastAvatar->link);
         }
 
         return $this->sex ? Storage::disk('s3')->url('avatars/user_woman.png') : Storage::disk('s3')->url('avatars/user_man.png');
+    }
+
+    /**
+     * Find user's contacts.
+     *
+     * @return mixed
+     */
+    public function getContacts()
+    {
+        $idsA = DB::table('user_contacts')
+            ->where('user_a_id', $this->id)
+            ->where('status', self::CONTACT_ACCEPTED_STATUS)
+            ->get()
+            ->pluck('user_b_id')
+            ->toArray();
+
+        $idsB = DB::table('user_contacts')
+            ->where('user_b_id', $this->id)
+            ->where('status', self::CONTACT_ACCEPTED_STATUS)
+            ->get()
+            ->pluck('user_a_id')
+            ->toArray();
+        
+        return User::find(array_merge($idsA, $idsB));
     }
 }

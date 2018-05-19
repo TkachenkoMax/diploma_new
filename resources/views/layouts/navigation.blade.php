@@ -11,7 +11,7 @@
                 <li class="dropdown">
                     <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Calendars <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Dashboard</a></li>
+                        <li><a href="/">Dashboard</a></li>
                         <li><a href="">Management</a></li>
                     </ul>
                 </li>
@@ -21,8 +21,12 @@
                 <li>
                     <a aria-expanded="false" role="button" href="#"> To-Do List </a>
                 </li>
-                <li>
-                    <a aria-expanded="false" role="button" href="#"> Contacts </a>
+                <li class="dropdown">
+                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Contacts <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="{{ route('contacts.list')  }}">List</a></li>
+                        <li><a href="">Management</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a aria-expanded="false" role="button" href="{{ route('settings.index')  }}"> Settings </a>
