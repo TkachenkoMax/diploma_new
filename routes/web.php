@@ -37,6 +37,11 @@ Route::middleware(['auth'])->group(function () {
             'as'         => 'contacts.delete',
             'uses'       => 'UserController@deleteContact',
         ]);
+
+        Route::get('/management', [
+            'as'         => 'contacts.management',
+            'uses'       => 'UserController@management',
+        ]);
     });
 
     //Settings block routes.

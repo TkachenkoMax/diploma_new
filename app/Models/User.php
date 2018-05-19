@@ -111,6 +111,40 @@ class User extends Authenticatable
     }
 
     /**
+     * Return collection of incoming contacts requests.
+     *
+     * @return mixed
+     */
+    public function getIncomingContactRequests()
+    {
+        $ids = DB::table('user_contacts')
+            ->where('user_b_id', $this->id)
+            ->where('status', self::CONTACT_REQUESTED_STATUS)
+            ->get()
+            ->pluck('user_a_id')
+            ->toArray();
+
+        return User::find($ids);
+    }
+
+    /**
+     * Return collection of outcoming contacts requests.
+     *
+     * @return mixed
+     */
+    public function getOutcomingContactRequests()
+    {
+        $ids = DB::table('user_contacts')
+            ->where('user_a_id', $this->id)
+            ->where('status', self::CONTACT_REQUESTED_STATUS)
+            ->get()
+            ->pluck('user_b_id')
+            ->toArray();
+
+        return User::find($ids);
+    }
+
+    /**
      * Find user's contacts.
      *
      * @return mixed

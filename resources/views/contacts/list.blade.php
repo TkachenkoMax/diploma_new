@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Settings')
+@section('title', 'Contacts - List')
 
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">

@@ -136,6 +136,22 @@ class UserController extends Controller
     }
 
     /**
+     * Shows contacts management page.
+     *
+     * @return $this
+     */
+    public function management()
+    {
+        $incomingContacts  = Auth::user()->getIncomingContactRequests();
+        $outcomingContacts = Auth::user()->getOutcomingContactRequests();
+
+        return view('contacts.management')->with([
+            'incomingContacts'  => $incomingContacts,
+            'outcomingContacts' => $outcomingContacts,
+        ]);
+    }
+
+    /**
      * Delete contact relationship between users.
      *
      * @param Request $request

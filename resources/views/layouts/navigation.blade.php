@@ -24,12 +24,12 @@
                 <li class="dropdown">
                     <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Contacts <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="{{ route('contacts.list')  }}">List</a></li>
-                        <li><a href="">Management</a></li>
+                        <li><a href="{{ route('contacts.list') }}">List</a></li>
+                        <li><a href="{{ route('contacts.management') }}">Management</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a aria-expanded="false" role="button" href="{{ route('settings.index')  }}"> Settings </a>
+                    <a aria-expanded="false" role="button" href="{{ route('settings.index') }}"> Settings </a>
                 </li>
                 @role('admin')
                 <li>
