@@ -19,10 +19,6 @@ class AWSMiddleware
 
         header('Access-Control-Allow-Origin: *');
 
-       /* $request->header->add([
-            'Access-Control-Allow-Origin' => '*'
-        ]);*/
-
         return $next($request);
     }
 }
