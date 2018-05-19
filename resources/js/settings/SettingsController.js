@@ -1,12 +1,55 @@
 import toastr from 'toastr';
+import * as Ladda from 'ladda';
 
 const SettingsController = function () {
+
+    /**
+     * Delete photo.
+     */
+    this.deletePhoto = function () {
+        window.swal({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this user!',
+            type: 'warning',
+            showCancelButton: true,
+            allowOutsideClick: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Yes, delete it!'
+        }, function () {
+            $.ajax({
+                url: `/settings/delete-photo`,
+                type: 'GET',
+                success: response => {
+                    const newUrl = response.link;
+                    $('#profile_picture').attr('src', newUrl);
+                    toastr.success('Photo successfully deleted!');
+                },
+                error: data => {
+                    toastr.error('Something went wrong!', data.responseJSON.error);
+                }
+            });
+        });
+    };
+
     /**
      * Set buttons handlers.
      */
     const bindHandlerEvents = () => {
-        $('#profile_picture').click(() => {
-           $('#update_photo_modal').modal('show');
+        $('#profile_picture').mouseover(() => {
+           $('.img-wrap .overlay').css('opacity', 1);
+        }).mouseleave((e) => {
+            if ($(e.relatedTarget).hasClass('overlay'))
+            {
+                $(e.relatedTarget).mouseleave(() => {
+                    $('.img-wrap .overlay').css('opacity', 0);
+                });
+
+                return;
+            }
+
+            $('.img-wrap .overlay').css('opacity', 0);
+        }).click(() => {
+            $('#update_photo_modal').modal('show');
         });
 
         //Image editor initialization.
@@ -22,7 +65,7 @@ const SettingsController = function () {
         const $inputImage = $("#inputImage");
         if (window.FileReader) {
             $inputImage.change(function() {
-                var fileReader = new FileReader(),
+                let fileReader = new FileReader(),
                     files = this.files,
                     file;
 
@@ -37,6 +80,7 @@ const SettingsController = function () {
                     fileReader.onload = function () {
                         $inputImage.val("");
                         $image.cropper("reset", true).cropper("replace", this.result);
+                        $("#zoomIn, #zoomOut, #rotateLeft, #rotateRight, #download").prop('disabled', false);
                     };
                 } else {
                     toastr.error("Please choose an image file.");
@@ -46,8 +90,11 @@ const SettingsController = function () {
             $inputImage.addClass("hide");
         }
 
+        const laddaDownload = Ladda.create(document.querySelector('#download'));
+
         $("#download").click(function() {
             $($image).cropper('getCroppedCanvas').toBlob(function (blob) {
+                laddaDownload.start();
                 const formData = new FormData();
 
                 formData.append('croppedImage', blob);
@@ -57,12 +104,17 @@ const SettingsController = function () {
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function () {
+                    success: response => {
+                        const newUrl = response.link;
+                        $('#profile_picture').attr('src', newUrl);
                         $('#update_photo_modal').modal('hide');
                         toastr.success("Successfully updated!");
                     },
-                    error: function () {
+                    error: () => {
                         toastr.error("Upload error!");
+                    },
+                    complete: () => {
+                        laddaDownload.stop();
                     }
                 });
             });
@@ -83,14 +135,17 @@ const SettingsController = function () {
         $("#rotateRight").click(function() {
             $image.cropper("rotate", -45);
         });
+
+        $(document).on('click', '#user-settings #delete_photo', this.deletePhoto);
     };
 
     /**
      * Init select with Select2.
      */
     const initSelect = () => {
-        $('#users-settings select').select2({width: '100%'});
+        $('#user-settings select').select2({width: '100%'});
     };
+
 
     /**
      * Initialize function.

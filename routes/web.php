@@ -25,11 +25,34 @@ Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    //Settings routes.
-    Route::get('/settings', 'UserController@settings')->name('settings.index');
-    Route::post('/settings/change-password', 'UserController@changePassword')->name('settings.change.password');
-    Route::post('/settings/change-information', 'UserController@changeInformation')->name('settings.change.information');
-    Route::post('/settings/change-photo', 'UserController@changePhoto')->name('settings.change.photo');
+    //Settings block routes.
+    Route::prefix('settings')->group(function () {
+        Route::get('/', [
+            'as'         => 'settings.index',
+            'uses'       => 'UserController@settings',
+            'middleware' => 'aws'
+        ]);
+
+        Route::post('/change-password', [
+            'as'    => 'settings.change.password',
+            'uses'  => 'UserController@changePassword'
+        ]);
+
+        Route::post('/change-information', [
+            'as'    => 'settings.change.information',
+            'uses'  => 'UserController@changeInformation'
+        ]);
+
+        Route::post('/change-photo', [
+            'as'    => 'settings.change.photo',
+            'uses'  => 'UserController@changePhoto'
+        ]);
+
+        Route::get('/delete-photo', [
+            'as'   => 'settings.delete.photo',
+            'uses' => 'UserController@deletePhoto',
+        ]);
+    });
 
     //Admin block routes.
     Route::middleware(['role:admin'])->prefix('admin')->group(function () {

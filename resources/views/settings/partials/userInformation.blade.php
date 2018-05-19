@@ -1,7 +1,10 @@
 <div class="col-sm-4">
     <div class="text-center">
-        <img alt="image" class="img-circle m-t-xs img-responsive img-responsive-50 cursor-pointer"
-             src="{{ url('storage/public/avatars/LsHVRZJM9u9g1KSckEsoAy9Tt3vtbO5PH72ZIVdK.png') }}" id="profile_picture">
+        <div class="img-wrap m-t-xs">
+            <img alt="image" class="img-circle img-responsive img-responsive-50 cursor-pointer"
+                 src="{{ $user->getAvatarUrl() }}" id="profile_picture">
+            @if($user->getLastAvatar())<div class="overlay"><span id="delete_photo">Delete</span></div>@endif
+        </div>
         <div class="m-t-xs font-bold">{{ $user->work_position ?: 'Work not specified' }}</div>
     </div>
 </div>

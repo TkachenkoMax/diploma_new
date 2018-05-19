@@ -11,15 +11,15 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="image-crop">
-                                    <img style="max-width:50%" src="https://pp.userapi.com/c637618/v637618140/4545d/Fef9fusl1o0.jpg">
+                                    <img style="max-width:50%" src="">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <h4>Preview image</h4>
                                 <div class="img-preview img-preview-sm img-circle img-responsive img-responsive-50"></div>
-                                <h4>Update tour photo</h4>
+                                <h4>Update profile photo</h4>
                                 <p>
-                                    You can change your old photo preview or upload new one.
+                                    You can upload new photo and crop it.
                                 </p>
                                 <div class="btn-group">
                                     <label title="Upload image file" for="inputImage" class="btn btn-primary">
@@ -33,10 +33,10 @@
                             <div class="col-md-6 col-md-offset-3">
                                 <h4 class="text-center">Useful methods</h4>
                                 <div class="btn-group">
-                                    <button class="btn btn-white" id="zoomIn" type="button">Zoom In</button>
-                                    <button class="btn btn-white" id="zoomOut" type="button">Zoom Out</button>
-                                    <button class="btn btn-white" id="rotateLeft" type="button">Rotate Left</button>
-                                    <button class="btn btn-white" id="rotateRight" type="button">Rotate Right</button>
+                                    <button class="btn btn-white" disabled id="zoomIn" type="button">Zoom In</button>
+                                    <button class="btn btn-white" disabled id="zoomOut" type="button">Zoom Out</button>
+                                    <button class="btn btn-white" disabled id="rotateLeft" type="button">Rotate Left</button>
+                                    <button class="btn btn-white" disabled id="rotateRight" type="button">Rotate Right</button>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <label title="Download image" id="download" class="btn btn-primary">Update</label>
+                <button title="Download image" disabled id="download" class="btn btn-primary ladda-button" data-style="zoom-in">Update</button>
             </div>
         </div>
     </div>

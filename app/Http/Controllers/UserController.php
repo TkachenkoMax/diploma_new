@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserAccountInformation;
+use App\Models\UserAvatar;
 use App\Repositories\UserRepository;
-use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserController
@@ -75,12 +73,51 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Information changed successfully!');
     }
 
+    /**
+     * Update user's profile picture.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function changePhoto(Request $request)
     {
-        $path = $request->file('croppedImage')->store('public/avatars');
+        $userId = Auth::user()->id;
 
-        $user = Auth::user();
-        $user->avatar = $path;
-        $user->save();
+        try {
+            $path = $request->file('croppedImage')->store(
+                'avatars/' . $userId, 's3'
+            );
+        } catch (\Exception $e) {
+            return response('Error loading avatar', 500);
+        }
+
+        $userAvatar = new UserAvatar();
+        $userAvatar->user_id = $userId;
+        $userAvatar->link = $path;
+        $userAvatar->save();
+
+        return response([
+            'message' => 'Avatar successfully downloaded',
+            'link'    => Auth::user()->getAvatarUrl()
+        ], 200);
+    }
+
+    /**
+     * Delete user's current avatar.
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deletePhoto()
+    {
+        $lastPhoto = Auth::user()->getLastAvatar();
+
+        if ($lastPhoto) {
+            $lastPhoto->delete();
+        }
+
+        return response([
+            'message' => 'Avatar successfully deleted',
+            'link'    => Auth::user()->getAvatarUrl()
+        ], 200);
     }
 }

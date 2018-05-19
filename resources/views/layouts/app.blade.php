@@ -17,7 +17,7 @@
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
 
-            <!-- Navigation -->
+        <!-- Navigation -->
         @include('layouts.navigation')
 
         <!-- Main view  -->

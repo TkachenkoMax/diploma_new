@@ -32,7 +32,7 @@ mix.sass('resources/themes/inspinia/sass/app.scss', 'public/css')
         'resources/themes/inspinia/vendor/daterangepicker/daterangepicker.css',
         'resources/themes/inspinia/vendor/bootstrap3-editable/css/bootstrap-editable.css',
         'resources/themes/inspinia/vendor/jasny-bootstrap/css/jasny-bootstrap.css',
-    ], 'public/css/vendor.css');
+    ], 'public/css/vendor.css')
     mix.js([
         'resources/themes/inspinia/vendor/bootstrap/js/bootstrap.js',
         'resources/themes/inspinia/vendor/metisMenu/jquery.metisMenu.js',
@@ -61,5 +61,5 @@ mix.sass('resources/themes/inspinia/sass/app.scss', 'public/css')
         'resources/js/settings/SettingsController.js',
     ], 'public/js/organizer.js')
     .extract(['jquery', 'bootstrap', 'bootstrap-tagsinput', 'lodash', 'chartjs-plugin-annotation',
-        'datatables.net', 'datatables.net-bs', 'datatables.net-buttons', 'toastr', 'cropper', 'jquery-cropper'])
+        'datatables.net', 'datatables.net-bs', 'datatables.net-buttons', 'toastr', 'cropper', 'jquery-cropper', 'ladda'])
     .version();

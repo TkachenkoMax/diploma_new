@@ -6,7 +6,7 @@
                     <div class="col-sm-4">
                         <div class="text-center">
                             <img alt="image" class="img-circle m-t-xs img-responsive"
-                                 src="https://png.icons8.com/color/1600/user-male-skin-type-4.png">
+                                 src="{{ $user->getAvatarUrl() }}">
                             <div class="m-t-xs font-bold">{{ $user->work_position ?: 'Work not specified' }}</div>
                         </div>
                     </div>

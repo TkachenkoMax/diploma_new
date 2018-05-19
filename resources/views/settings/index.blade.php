@@ -8,7 +8,7 @@
             <h2>Settings</h2>
         </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInDown" id="users-settings">
+    <div class="wrapper wrapper-content animated fadeInDown" id="user-settings">
         <div class="row">
             <div class="col-lg-6">
                 <div class="ibox">
