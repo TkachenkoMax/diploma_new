@@ -31,5 +31,4 @@ $(document).ready(function () {
     });
 
     helpers.initIChecks();
-    helpers.initSelect2();
 });

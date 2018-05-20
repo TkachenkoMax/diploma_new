@@ -105,7 +105,7 @@ class UserRepository extends BaseRepository
             ->pluck('user_a_id')
             ->toArray();
 
-        $builder = $this->getBuilder()->select('users.*')->whereNotIn('id', array_merge($idsA, $idsB));
+        $builder = $this->getBuilder()->select('users.*')->whereNotIn('id', array_merge($idsA, $idsB, [Auth::user()->id]));
 
         return DataTables::of($builder)
             ->addColumn('profile_picture', function ($builder) {

@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Class UserCriteria
+ * Class UserCriteria.
  */
 class UserCriteria extends BaseCriteria
 {
     /**
-     * Apply criteria in query repository
+     * Apply criteria in query repository.
      *
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model $model
      * @param \Prettus\Repository\Contracts\RepositoryInterface $repository

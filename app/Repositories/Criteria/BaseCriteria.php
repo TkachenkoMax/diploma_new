@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
- * Class BaseCriteria
+ * Class BaseCriteria.
  */
 abstract class BaseCriteria extends RequestCriteria
 {
@@ -30,7 +30,7 @@ abstract class BaseCriteria extends RequestCriteria
     }
 
     /**
-     * Check "order_by" request item
+     * Check "order_by" request item.
      *
      * @return mixed
      */

@@ -167,4 +167,14 @@ class User extends Authenticatable
         
         return User::find(array_merge($idsA, $idsB));
     }
+
+    /**
+     * Get calendars created by user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function calendars()
+    {
+        return $this->hasMany('App\Models\UserAvatar', 'creator_id', 'id');
+    }
 }
