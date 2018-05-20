@@ -40,7 +40,7 @@ const ContactsManagementController = function () {
                         return `
                            <img alt='image' class='img-circle' style='width: 50px;' src='${data.profile_picture}'>
                         `;
-                    }, name: 'Photo', class: 'users-photo', 'orderable': false},
+                    }, name: 'Photo', class: 'users-photo align-middle', 'orderable': false},
                 {data: 'fullname', name: 'Fullname', class: 'users-fullname align-middle'},
                 {data: 'formatted_birthday', name: 'Date of Birth', class: 'users-birthday align-middle'},
                 {data: 'work_information', name: 'Date of Birth', class: 'users-work align-middle'},
@@ -141,7 +141,7 @@ const ContactsManagementController = function () {
 
         const debounce = _.debounce(getDataForDataTable, 2000, false);
 
-        $('#users-management #filter-by-name').keyup(function() {
+        $('#users-management #filter-by-name').on('keyup touchend', () => {
             return debounce();
         });
     };

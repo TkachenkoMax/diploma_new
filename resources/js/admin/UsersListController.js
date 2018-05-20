@@ -167,7 +167,7 @@ const UsersListController = function () {
 
         const debounce = _.debounce(getDataForDataTable, 2000, false);
 
-        $('#users-list #filter-by-name').keyup(function() {
+        $('#users-list #filter-by-name').on('keyup touchend', () => {
             $('#users-list #reset-filter').removeClass('hidden');
             return debounce();
         });
