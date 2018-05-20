@@ -17,6 +17,38 @@
                     </div>
                     <div class="ibox-content" style="min-height: 300px">
                         <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label small">Name</label>
+                                <input name="filter_name" type="text" class="form-control" id="filter-by-name" placeholder="Enter part of fullname..."/>
+                            </div>
+                        </div>
+                        <div class="sk-spinner sk-spinner-double-bounce">
+                            <div class="sk-double-bounce1"></div>
+                            <div class="sk-double-bounce2"></div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover text-center hidden" id="users-search">
+                                <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Fullname</th>
+                                    <th>Date of Birth</th>
+                                    <th>Work</th>
+                                    <th class="col-actions"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="users-photo"></td>
+                                    <td class="users-fullname"></td>
+                                    <td class="users-birthday"></td>
+                                    <td class="users-work"></td>
+                                    <td class="users-actions"></td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -228,4 +228,38 @@ class UserController extends Controller
 
         return response('Contact request declined', 200);
     }
+
+    /**
+     * Send request for adding to contacts to a user.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function sendRequest(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $contactId = $request->user_id;
+
+        DB::table('user_contacts')
+            ->insert([
+                'user_a_id' => $userId,
+                'user_b_id' => $contactId,
+                'status'    => User::CONTACT_REQUESTED_STATUS
+            ]);
+
+        return response('Contact request sent', 200);
+    }
+
+    /**
+     * Search potential contacts for table.
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function searchContacts(Request $request)
+    {
+        return $this->repository->getContactsForDataTable();
+    }
 }

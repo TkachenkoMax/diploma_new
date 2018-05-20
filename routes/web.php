@@ -52,6 +52,16 @@ Route::middleware(['auth'])->group(function () {
             'as'         => 'contacts.management.decline',
             'uses'       => 'UserController@declineRequest',
         ]);
+
+        Route::post('/management/send', [
+            'as'         => 'contacts.management.send',
+            'uses'       => 'UserController@sendRequest',
+        ]);
+
+        Route::get('/management/search', [
+            'as'         => 'contacts.management.search',
+            'uses'       => 'UserController@searchContacts',
+        ]);
     });
 
     //Settings block routes.
