@@ -59,6 +59,8 @@ mix.sass('resources/themes/inspinia/sass/app.scss', 'public/css')
         'resources/js/dashboard/DashboardController.js',
         'resources/js/admin/UsersListController.js',
         'resources/js/settings/SettingsController.js',
+        'resources/js/contacts/ContactListController.js',
+        'resources/js/contacts/ContactsManagementController.js',
     ], 'public/js/organizer.js')
     .extract(['jquery', 'bootstrap', 'bootstrap-tagsinput', 'lodash', 'chartjs-plugin-annotation',
         'datatables.net', 'datatables.net-bs', 'datatables.net-buttons', 'toastr', 'cropper', 'jquery-cropper', 'ladda'])

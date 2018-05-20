@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserAccountInformation;
+use App\Models\User;
 use App\Models\UserAvatar;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UserController
@@ -119,5 +121,144 @@ class UserController extends Controller
             'message' => 'Avatar successfully deleted',
             'link'    => Auth::user()->getAvatarUrl()
         ], 200);
+    }
+
+    /**
+     * Shows page with user's contacts.
+     *
+     * @return $this
+     */
+    public function contacts()
+    {
+        $userContacts = Auth::user()->getContacts();
+
+        return view('contacts.list')->with('contacts', $userContacts);
+    }
+
+    /**
+     * Shows contacts management page.
+     *
+     * @return $this
+     */
+    public function management()
+    {
+        $incomingContacts  = Auth::user()->getIncomingContactRequests();
+        $outcomingContacts = Auth::user()->getOutcomingContactRequests();
+
+        return view('contacts.management')->with([
+            'incomingContacts'  => $incomingContacts,
+            'outcomingContacts' => $outcomingContacts,
+        ]);
+    }
+
+    /**
+     * Delete contact relationship between users.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteContact(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $contactId = $request->user_id;
+
+        DB::table('user_contacts')
+            ->where([
+                'user_a_id' => $userId,
+                'user_b_id' => $contactId
+            ])
+            ->orWhere(function ($query) use ($userId, $contactId) {
+                $query->where([
+                    'user_b_id' => $userId,
+                    'user_a_id' => $contactId
+                ]);
+            })
+            ->delete();
+
+        return response('Contact deleted', 200);
+    }
+
+    /**
+     * Accept add to contact request.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function acceptRequest(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $contactId = $request->user_id;
+
+        DB::table('user_contacts')
+            ->where([
+                'user_a_id' => $contactId,
+                'user_b_id' => $userId
+            ])
+            ->update([
+                'status' => User::CONTACT_ACCEPTED_STATUS
+            ]);
+
+        return response('Contact request accepted', 200);
+    }
+
+    /**
+     * Decline add to contact request.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function declineRequest(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $contactId = $request->user_id;
+
+        DB::table('user_contacts')
+            ->where([
+                'user_a_id' => $userId,
+                'user_b_id' => $contactId
+            ])
+            ->orWhere(function ($query) use ($userId, $contactId) {
+                $query->where([
+                    'user_b_id' => $userId,
+                    'user_a_id' => $contactId
+                ]);
+            })
+            ->delete();
+
+        return response('Contact request declined', 200);
+    }
+
+    /**
+     * Send request for adding to contacts to a user.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function sendRequest(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $contactId = $request->user_id;
+
+        DB::table('user_contacts')
+            ->insert([
+                'user_a_id' => $userId,
+                'user_b_id' => $contactId,
+                'status'    => User::CONTACT_REQUESTED_STATUS
+            ]);
+
+        return response('Contact request sent', 200);
+    }
+
+    /**
+     * Search potential contacts for table.
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function searchContacts(Request $request)
+    {
+        return $this->repository->getContactsForDataTable();
     }
 }

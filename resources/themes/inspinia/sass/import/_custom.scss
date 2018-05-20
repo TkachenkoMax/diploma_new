@@ -852,3 +852,22 @@ $spinnerSize: 32px !default;
 .overlay > span {
   cursor: pointer;
 }
+
+.contact-wrap {
+  position: relative;
+  border: 0;
+
+  img {
+    margin: 0 auto;
+  }
+
+  .contact-delete {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}
+
+.align-middle {
+  vertical-align: middle!important;
+}

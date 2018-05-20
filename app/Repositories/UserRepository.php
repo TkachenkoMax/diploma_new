@@ -81,4 +81,55 @@ class UserRepository extends BaseRepository
         $user->fill($params);
         $user->save();
     }
+
+    /**
+     * Get contacts for datatable.
+     *
+     * @return mixed
+     * @throws \Exception
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function getContactsForDataTable()
+    {
+        $this->pushCriteria(app(UserCriteria::class));
+
+        $idsA = DB::table('user_contacts')
+            ->where('user_a_id', Auth::user()->id)
+            ->get()
+            ->pluck('user_b_id')
+            ->toArray();
+
+        $idsB = DB::table('user_contacts')
+            ->where('user_b_id', Auth::user()->id)
+            ->get()
+            ->pluck('user_a_id')
+            ->toArray();
+
+        $builder = $this->getBuilder()->select('users.*')->whereNotIn('id', array_merge($idsA, $idsB));
+
+        return DataTables::of($builder)
+            ->addColumn('profile_picture', function ($builder) {
+                return $builder->getAvatarUrl();
+            })
+            ->addColumn('fullname', function ($builder) {
+                return $builder->getFullName();
+            })
+            ->addColumn('formatted_birthday', function ($builder) {
+                return $builder->date_of_birth ? Carbon::parse($builder->date_of_birth)->toFormattedDateString() : 'Not specified';
+            })
+            ->addColumn('work_information', function ($builder) {
+                $workText = 'Not specified';
+
+                if ($builder->work_position && $builder->work_place) {
+                    $workText = $builder->work_position . ' at ' . $builder->work_place;
+                } else if ($builder->work_position && !$builder->work_place) {
+                    $workText = $builder->work_position;
+                } else if (!$builder->work_position && $builder->work_place) {
+                    $workText = 'Work at ' . $builder->work_place;
+                }
+
+                return $workText;
+            })
+            ->make(true);
+    }
 }
