@@ -21,8 +21,11 @@
                 <li>
                     <a aria-expanded="false" role="button" href="#"> To-Do List </a>
                 </li>
+                @php
+                    $incomingContactRequestsCount = count(Auth::user()->getIncomingContactRequests());
+                @endphp
                 <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Contacts <span class="caret"></span></a>
+                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Contacts @if($incomingContactRequestsCount)<span class="label label-primary">{{ $incomingContactRequestsCount }}</span> @endif<span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li><a href="{{ route('contacts.list') }}">List</a></li>
                         <li><a href="{{ route('contacts.management') }}">Management</a></li>

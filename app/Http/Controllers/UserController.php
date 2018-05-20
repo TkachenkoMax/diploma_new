@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserAccountInformation;
+use App\Models\User;
 use App\Models\UserAvatar;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -176,5 +177,55 @@ class UserController extends Controller
             ->delete();
 
         return response('Contact deleted', 200);
+    }
+
+    /**
+     * Accept add to contact request.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function acceptRequest(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $contactId = $request->user_id;
+
+        DB::table('user_contacts')
+            ->where([
+                'user_a_id' => $contactId,
+                'user_b_id' => $userId
+            ])
+            ->update([
+                'status' => User::CONTACT_ACCEPTED_STATUS
+            ]);
+
+        return response('Contact request accepted', 200);
+    }
+
+    /**
+     * Decline add to contact request.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function declineRequest(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $contactId = $request->user_id;
+
+        DB::table('user_contacts')
+            ->where([
+                'user_a_id' => $userId,
+                'user_b_id' => $contactId
+            ])
+            ->orWhere(function ($query) use ($userId, $contactId) {
+                $query->where([
+                    'user_b_id' => $userId,
+                    'user_a_id' => $contactId
+                ]);
+            })
+            ->delete();
+
+        return response('Contact request declined', 200);
     }
 }

@@ -42,6 +42,16 @@ Route::middleware(['auth'])->group(function () {
             'as'         => 'contacts.management',
             'uses'       => 'UserController@management',
         ]);
+
+        Route::post('/management/accept', [
+            'as'         => 'contacts.management.accept',
+            'uses'       => 'UserController@acceptRequest',
+        ]);
+
+        Route::post('/management/decline', [
+            'as'         => 'contacts.management.decline',
+            'uses'       => 'UserController@declineRequest',
+        ]);
     });
 
     //Settings block routes.
@@ -53,23 +63,23 @@ Route::middleware(['auth'])->group(function () {
         ]);
 
         Route::post('/change-password', [
-            'as'    => 'settings.change.password',
-            'uses'  => 'UserController@changePassword'
+            'as'         => 'settings.change.password',
+            'uses'       => 'UserController@changePassword'
         ]);
 
         Route::post('/change-information', [
-            'as'    => 'settings.change.information',
-            'uses'  => 'UserController@changeInformation'
+            'as'         => 'settings.change.information',
+            'uses'       => 'UserController@changeInformation'
         ]);
 
         Route::post('/change-photo', [
-            'as'    => 'settings.change.photo',
-            'uses'  => 'UserController@changePhoto'
+            'as'         => 'settings.change.photo',
+            'uses'       => 'UserController@changePhoto'
         ]);
 
         Route::get('/delete-photo', [
-            'as'   => 'settings.delete.photo',
-            'uses' => 'UserController@deletePhoto',
+            'as'         => 'settings.delete.photo',
+            'uses'       => 'UserController@deletePhoto',
         ]);
     });
 
