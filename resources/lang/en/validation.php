@@ -87,7 +87,6 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-    'coincide_date'        => 'A Report Date with the same date, already exists!',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,40 +100,8 @@ return [
     */
 
     'custom' => [
-
         'attribute-name' => [
             'rule-name' => 'custom-message',
-        ],
-        'general_status_comment' => [
-            'required' => 'A Short Summary is required',
-            'max' => 'A Short Summary must be maximum 140 symbols',
-        ],
-        'report_date' => [
-            'required' => 'A Report Date is required',
-            'date_format' => 'A Report Date must be in d/m/Y format',
-        ],
-        'report.budget_spent' => [
-                'required' => 'A Budget Spent is required',
-                'numeric' => 'A Budget Spent must contain only numbers',
-                'max' => 'A Budget Spent must be contain maximum 6 symbols',
-        ],
-        'report.budget_remaining' => [
-            'numeric' => 'A Budget Remaining must contain only numbers',
-        ],
-        'report.budget_estimate' => [
-            'numeric' => 'A Budget Estimate must contain only numbers',
-        ],
-        'report.budget' => [
-            'numeric' => 'A Budget must contain only numbers',
-        ],
-        'report.tex_portal' => [
-            'max' => 'A TEX Portal must contain maximum 1500 symbols',
-        ],
-        'milestone.*.date' => [
-            'date_format' => 'A Milestone Date must be in d/m/Y format',
-        ],
-        'milestone.*.status' => [
-            'integer' => 'A Milestone State must be integer',
         ],
     ],
 
