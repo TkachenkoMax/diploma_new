@@ -25,6 +25,14 @@ Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
+    //Calendars block routes.
+    Route::prefix('calendars')->group(function () {
+        Route::get('/management', [
+            'as'   => 'calendars.management',
+            'uses' => 'CalendarController@management',
+        ]);
+    });
+
     //Contacts block routes.
     Route::prefix('contacts')->group(function () {
         Route::get('/list', [

@@ -1,17 +1,5 @@
 <div class="row">
     <div class="form-group col-lg-12">
-        <div class="i-checks">
-            <label>
-                <input type="checkbox"
-                       class="filter-checkbox"
-                       id="filter-my-calendars"
-                       data-role="i-check"
-                >
-                Only my calendars
-            </label>
-        </div>
-    </div>
-    <div class="form-group col-lg-12">
         <label class="control-label small">Selected calendars</label>
         {!! Form::select('filter_calendars', ['all' => 'All'],
         0,

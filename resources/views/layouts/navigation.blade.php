@@ -13,7 +13,7 @@
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Calendars <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a href="/">Dashboard</a></li>
-                            <li><a href="">Management</a></li>
+                            <li><a href="{{ route('calendars.management') }}">Management</a></li>
                         </ul>
                     </li>
                     <li>
