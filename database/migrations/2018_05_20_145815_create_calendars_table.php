@@ -16,7 +16,7 @@ class CreateCalendarsTable extends Migration
         Schema::create('calendars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->tinyInteger('is_public');
             $table->tinyInteger('is_editable');
             $table->integer('creator_id', false, true);
@@ -36,7 +36,7 @@ class CreateCalendarsTable extends Migration
     public function down()
     {
         Schema::table('calendars', function (Blueprint $table) {
-            $table->dropForeign(['creator_id']);
+            $table->dropForeign('calendars_creator_id_foreign');
         });
 
         Schema::dropIfExists('calendars');

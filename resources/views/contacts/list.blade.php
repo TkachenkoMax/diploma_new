@@ -32,7 +32,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-7 text-center">
-                                            <h3><strong>{{ $contact->getFullName() }} @if(isset($contact->sex))({{ $contact->getSex() }})@endif</strong></h3>
+                                            <h3><strong>{{ $contact->fullName }} @if(isset($contact->sex))({{ $contact->getSex() }})@endif</strong></h3>
                                             <p>Date of birth: {{ $contact->date_of_birth ? \Illuminate\Support\Carbon::parse($contact->date_of_birth)->toFormattedDateString() : 'Not specified' }}</p>
                                             <p>Work place: {{ $contact->work_place ?: 'Not specified' }}</p>
                                             <p><a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a></p>

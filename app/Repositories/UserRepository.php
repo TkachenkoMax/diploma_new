@@ -112,7 +112,7 @@ class UserRepository extends BaseRepository
                 return $builder->getAvatarUrl();
             })
             ->addColumn('fullname', function ($builder) {
-                return $builder->getFullName();
+                return $builder->getFullNameAttribute();
             })
             ->addColumn('formatted_birthday', function ($builder) {
                 return $builder->date_of_birth ? Carbon::parse($builder->date_of_birth)->toFormattedDateString() : 'Not specified';

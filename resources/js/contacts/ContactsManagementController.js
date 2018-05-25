@@ -1,5 +1,5 @@
 import toastr from 'toastr';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 const ContactsManagementController = function () {
 

@@ -33,8 +33,9 @@ class CreateCalendarUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('calendars', function (Blueprint $table) {
-            $table->dropForeign(['user_id', 'calendar_id']);
+        Schema::table('calendar_user', function (Blueprint $table) {
+            $table->dropForeign('calendar_user_calendar_id_foreign');
+            $table->dropForeign('calendar_user_user_id_foreign');
         });
 
         Schema::dropIfExists('calendar_user');

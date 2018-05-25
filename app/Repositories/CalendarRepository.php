@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Calendar;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class CalendarRepository.
@@ -31,5 +32,22 @@ class CalendarRepository extends BaseRepository
     public function findById($id)
     {
         return $this->find($id);
+    }
+
+    /**
+     * Store new calendar in the database.
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function createCalendar(array $data): bool
+    {
+        $calendar = new $this->model();
+        $calendar->fill(array_only($data, ['name', 'description', 'is_public', 'is_editable']) + ['creator_id' => Auth::user()->id]);
+        $calendar->save();
+
+        $calendar->users()->attach($data['assigned_users'] ?? []);
+
+        return true;
     }
 }

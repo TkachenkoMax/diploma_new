@@ -23,8 +23,18 @@ class Calendar extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function creator()
     {
         return $this->belongsTo('App\Models\User', 'id', 'creator_id');
+    }
+
+    /**
+     * Get all assigned to the calendar users.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
     }
 }

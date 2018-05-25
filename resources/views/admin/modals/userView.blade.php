@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        <h3><strong>{{ $user->getFullName() }} @if(isset($user->sex))({{ $user->getSex() }})@endif</strong></h3>
+                        <h3><strong>{{ $user->fullName }} @if(isset($user->sex))({{ $user->getSex() }})@endif</strong></h3>
                         <p>Date of birth: {{ $user->date_of_birth ? \Illuminate\Support\Carbon::parse($user->date_of_birth)->toFormattedDateString() : 'Not specified' }}</p>
                         <p>Work place: {{ $user->work_place ?: 'Not specified' }}</p>
                         <p><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></p>

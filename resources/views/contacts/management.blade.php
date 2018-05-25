@@ -82,7 +82,7 @@
                                                 @foreach($incomingContacts as $contact)
                                                     <tr data-user-id="{{ $contact->id }}">
                                                         <td width="20%" class="align-middle"><img alt="image" class="img-circle" style="width: 50px;" src="{{ $contact->getAvatarUrl() }}"></td>
-                                                        <td width="30%" class="align-middle">{{ $contact->getFullName() }}</td>
+                                                        <td width="30%" class="align-middle">{{ $contact->fullName }}</td>
                                                         <td width="35%" class="align-middle">{{ $contact->email }}</td>
                                                         <td width="15%" class="align-middle">
                                                             <div>
@@ -118,7 +118,7 @@
                                             @foreach($outcomingContacts as $contact)
                                                 <tr data-user-id="{{ $contact->id }}">
                                                     <td width="20%" class="align-middle"><img alt="image" class="img-circle" style="width: 50px;" src="{{ $contact->getAvatarUrl() }}"></td>
-                                                    <td width="30%" class="align-middle">{{ $contact->getFullName() }}</td>
+                                                    <td width="30%" class="align-middle">{{ $contact->fullName }}</td>
                                                     <td width="35%" class="align-middle">{{ $contact->email }}</td>
                                                     <td width="15%" class="align-middle">
                                                         <div>

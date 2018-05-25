@@ -31,6 +31,21 @@ Route::middleware(['auth'])->group(function () {
             'as'   => 'calendars.management',
             'uses' => 'CalendarController@management',
         ]);
+
+        Route::post('/create', [
+            'as'   => 'calendar.create',
+            'uses' => 'CalendarController@create'
+        ]);
+
+        Route::get('/{id}/edit', [
+            'as'   => 'calendar.edit',
+            'uses' => 'CalendarController@edit'
+        ]);
+
+        Route::put('/{id}/update', [
+            'as'   => 'calendar.update',
+            'uses' => 'CalendarController@update'
+        ]);
     });
 
     //Contacts block routes.

@@ -26,7 +26,7 @@
                 </div>
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
-                        <h4>Hello, {{ Auth::user()->getFullName() }}!</h4>
+                        <h4>Hello, {{ Auth::user()->fullName }}!</h4>
                         <p>Today is {{ \Carbon\Carbon::now()->toFormattedDateString() }}</p>
                     </div>
                 </div>

@@ -62,7 +62,7 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getFullName() {
+    public function getFullNameAttribute() {
         return $this->firstname . ' ' . $this->lastname;
     }
 
@@ -173,8 +173,18 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function calendars()
+    public function myCalendars()
     {
         return $this->hasMany('App\Models\UserAvatar', 'creator_id', 'id');
+    }
+
+    /**
+     * Get all user's calendars.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function calendars()
+    {
+        return $this->belongsToMany('App\Models\Calendar');
     }
 }

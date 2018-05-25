@@ -72,6 +72,11 @@
                         @include('dashboard.partials.calendarsListFilters')
                     </div>
                 </div>
+                <div class="ibox-tools pull-right m-b-md">
+                    <a href="" id="create_new_calendar">
+                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-lg fa-plus-circle"></i> Create Calendar</button>
+                    </a>
+                </div>
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>List of your calendars</h5>
@@ -122,6 +127,7 @@
                     <h4 class="modal-title">Create new calendar</h4>
                 </div>
                 <div class="create-calendar-body">
+                    @include('dashboard.modals.calendarBody')
                 </div>
             </div>
         </div>
